@@ -1,4 +1,4 @@
-print("main.py")
+print("mainfile")
 
 import pandas as pd
 import config
