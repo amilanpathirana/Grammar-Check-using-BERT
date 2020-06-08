@@ -17,6 +17,7 @@ class DataSet():
 
         inputs=self.tokenizer.encode_plus(
             sentence,
+            None,
             add_special_tokens=True,
             max_length=self.max_len,
             pad_to_max_length=True
