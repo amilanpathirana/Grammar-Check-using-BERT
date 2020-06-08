@@ -1,7 +1,7 @@
 import config
 import torch
 
-class DataSet:
+class DataSet():
     def __init__(self,sentences,labels):
         self.sentences=sentences
         self.labels=labels
