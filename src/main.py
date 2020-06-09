@@ -101,6 +101,7 @@ def run():
         accuracy= metrics.accuracy_score(targets,outputs)
         best_accuracy=0
         print(f"Accuracy Score = {accuracy}")
+
         if accuracy > best_accuracy:
             torch.save(model.state_dict(), config.MODEL_PATH)
             best_accuracy = accuracy
