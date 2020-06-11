@@ -1,7 +1,7 @@
 import transformers
 
-DATA_PATH="../input/cola.tsv"
-BERT_PATH="../input/bert_base_uncased/"
+DATA_PATH="./input/cola.tsv"
+BERT_PATH="./input/bert_base_uncased/"
 MODEL_PATH="model.bin"
 
 TRAIN_BATCH_SIZE=4

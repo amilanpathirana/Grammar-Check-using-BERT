@@ -55,7 +55,7 @@ def sentence_prediction(sentence):
     token_type_ids = token_type_ids.to(DEVICE, dtype=torch.long)
     mask = mask.to(DEVICE, dtype=torch.long)
 
-    outputs = MODEL(ids=ids, mask=mask, token_type_ids=token_type_ids)
+    outputs = MODEL(ids=ids, mask=mask, ttid=token_type_ids)
 
     outputs = torch.sigmoid(outputs).cpu().detach().numpy()
     return outputs[0][0]
@@ -69,10 +69,10 @@ def predict():
     negative_prediction = 1 - positive_prediction
     response = {}
     response["response"] = {
-        "positive": str(positive_prediction),
-        "negative": str(negative_prediction),
-        "sentence": str(sentence),
-        "time_taken": str(time.time() - start_time),
+        "Correct": str(positive_prediction),
+        "Incorrect": str(negative_prediction),
+        "Phrase": str(sentence),
+        "Processing_time": str(time.time() - start_time),
     }
     return flask.jsonify(response)
 
