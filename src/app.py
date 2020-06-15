@@ -3,6 +3,7 @@ import torch
 import flask
 import time
 from flask import Flask
+from flask import render_template
 from flask import request
 from model import BERTModel
 import functools
@@ -18,13 +19,6 @@ PREDICTION_DICT = dict()
 memory = joblib.Memory("./input/", verbose=0)
 
 
-def predict_from_cache(sentence):
-    if sentence in PREDICTION_DICT:
-        return PREDICTION_DICT[sentence]
-    else:
-        result = sentence_prediction(sentence)
-        PREDICTION_DICT[sentence] = result
-        return result
 
 
 @memory.cache
@@ -61,20 +55,21 @@ def sentence_prediction(sentence):
     return outputs[0][0]
 
 
-@app.route("/predict")
-def predict():
-    sentence = request.args.get("sentence")
-    start_time = time.time()
-    positive_prediction = sentence_prediction(sentence)
-    negative_prediction = 1 - positive_prediction
-    response = {}
-    response["response"] = {
-        "Correct": str(positive_prediction),
-        "Incorrect": str(negative_prediction),
-        "Phrase": str(sentence),
-        "Processing_time": str(time.time() - start_time),
-    }
-    return flask.jsonify(response)
+@app.route('/', methods=['GET','POST'])
+
+def my_form_post():
+    if request.method=="POST":
+        text = request.form['text']
+        processed_text = text.lower()
+        text_file = open("inputs.txt", "a")
+        text_file.write("Input Text: %s" % processed_text)
+        text_file.write("\n")
+        text_file.close()
+        pred=sentence_prediction(processed_text)
+        return render_template('index.html',prediction=pred)
+    return render_template('index.html',prediction=0 )
+
+
 
 
 if __name__ == "__main__":
@@ -83,4 +78,4 @@ if __name__ == "__main__":
     MODEL.load_state_dict(torch.load(config.MODEL_PATH))
     MODEL.to(DEVICE)
     MODEL.eval()
-    app.run()
+    app.run(debug=True)
