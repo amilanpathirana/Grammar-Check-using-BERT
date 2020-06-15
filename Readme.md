@@ -1,4 +1,5 @@
-# About this application
+# About this application - GRAMAR CHECK
+----
 
 The BERT machine learning model, a powerful natural language processing model developed with transformers is trained to classify whether a given sentence is grammatically correct. The BERT model was trained with the Corpus of Linguistic Acceptability (CoLA) dataset. Final model has the accuracy of 85% after two epochs.
 
