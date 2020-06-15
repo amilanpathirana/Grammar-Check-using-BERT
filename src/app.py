@@ -59,6 +59,7 @@ def sentence_prediction(sentence):
 
 def my_form_post():
     if request.method=="POST":
+                  
         text = request.form['text']
         processed_text = text.lower()
         text_file = open("inputs.txt", "a")
@@ -66,10 +67,8 @@ def my_form_post():
         text_file.write("\n")
         text_file.close()
         pred=sentence_prediction(processed_text)
-        return render_template('index.html',prediction=pred)
-    return render_template('index.html',prediction=0 )
-
-
+        return render_template('index.html',prediction=round(pred*100,1),sen=processed_text)
+    return render_template('index.html',prediction=0 ,sen="-")
 
 
 if __name__ == "__main__":
@@ -78,4 +77,4 @@ if __name__ == "__main__":
     MODEL.load_state_dict(torch.load(config.MODEL_PATH))
     MODEL.to(DEVICE)
     MODEL.eval()
-    app.run(debug=True)
+    app.run(debug=True,port= 12000)
