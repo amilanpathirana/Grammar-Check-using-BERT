@@ -1,6 +1,6 @@
 # About this application - GRAMAR CHECK
 ----
-![Image of Yaktocat](https://octodex.github.com/images/yaktocat.png)
+![Image of AI bot](https://github.com/amilanpathirana/grammar/blob/master/src/templates/195.jpg)
 
 The BERT machine learning model, a powerful natural language processing model developed with transformers is trained to classify whether a given sentence is grammatically correct. The BERT model was trained with the Corpus of Linguistic Acceptability (CoLA) dataset. Final model has the accuracy of 85% after two epochs.
 
